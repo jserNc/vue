@@ -1,4 +1,4 @@
-var apiURL = 'https://api.github.com/repos/vuejs/vue/commits?per_page=3&sha='
+var apiURL = 'https://api.github.com/repos/vuejs/vue/commits?per_page=5&sha='
 
 /**
  * Actual demo
