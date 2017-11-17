@@ -6,6 +6,7 @@ import { lifecycleMixin } from './lifecycle'
 import { warn } from '../util/index'
 
 function Vue (options) {
+  // 在开发环境下，process.env.NODE_ENV 会替换为 "development"
   if (process.env.NODE_ENV !== 'production' &&
     !(this instanceof Vue)
   ) {
