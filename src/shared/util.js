@@ -84,11 +84,20 @@ export function toNumber (val: string): number | string {
  * Make a map and return a function for checking if a key
  * is in that map.
  */
+/*
+	1. makeMap 函数参数：
+	str : string 类型
+	expectsLowerCase ： 可以省略，boolean 类型
+	2. makeMap 函数返回值为一个函数：
+	(key: string) => true | void
+	该函数参数为 string 类型，返回值为 true 或 undefined
+*/
 export function makeMap (
   str: string,
   expectsLowerCase?: boolean
 ): (key: string) => true | void {
   const map = Object.create(null)
+  // list 为数组，数组元素是 string 类型
   const list: Array<string> = str.split(',')
   for (let i = 0; i < list.length; i++) {
     map[list[i]] = true
