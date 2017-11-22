@@ -1,3 +1,4 @@
+// Vue 对象（构造函数）拥有以下属性
 declare interface GlobalAPI {
   cid: number;
   options: Object;

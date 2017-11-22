@@ -8,6 +8,7 @@ import {
 
 import { LIFECYCLE_HOOKS } from 'shared/constants'
 
+// 定义 config 数据类型
 export type Config = {
   // user
   optionMergeStrategies: { [key: string]: Function };
@@ -32,6 +33,7 @@ export type Config = {
   _lifecycleHooks: Array<string>;
 };
 
+// 导出 config 类型的一个数据对象
 export default ({
   /**
    * Option merge strategies (used in core/util/options)
