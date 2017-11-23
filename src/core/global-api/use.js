@@ -1,5 +1,6 @@
 /* @flow */
 
+// toArray 方法将类数组转成真正数组，并从指定索引截取该数组，例：toArray([0, 1, 2, 3, 4, 5, 6], 2) -> [2, 3, 4, 5, 6]
 import { toArray } from '../util/index'
 
 // 安装 Vue.use 方法
@@ -13,7 +14,6 @@ export function initUse (Vue: GlobalAPI) {
     }
 
     // additional parameters
-    // toArray 方法将类数组转成真正数组，并从指定索引截取该数组，例：toArray([0, 1, 2, 3, 4, 5, 6], 2) -> [2, 3, 4, 5, 6]
     // 除了第一个参数的数组
     const args = toArray(arguments, 1)
     // 将 Vue 加入到数组，作为第一个元素

@@ -35,6 +35,7 @@ const sharedPropertyDefinition = {
 
 export function proxy (target: Object, sourceKey: string, key: string) {
   sharedPropertyDefinition.get = function proxyGetter () {
+	// 这里的 this 指 target，可以通过打印 console.log('this === target:',this === target) 来验证
     return this[sourceKey][key]
   }
   sharedPropertyDefinition.set = function proxySetter (val) {
