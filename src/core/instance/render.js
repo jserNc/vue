@@ -30,6 +30,7 @@ import { renderStatic, markOnce } from './render-helpers/render-static'
 import { bindObjectListeners } from './render-helpers/bind-object-listeners'
 import { resolveSlots, resolveScopedSlots } from './render-helpers/resolve-slots'
 
+// 初始化 vm._vnode、vm._staticTrees、vm.$vnode、vm.$slots、vm.$scopedSlots、vm._c、vm.$createElement、vm.$attrs、vm.$listeners 等属性
 export function initRender (vm: Component) {
   vm._vnode = null // the root of the child tree
   vm._staticTrees = null

@@ -2,6 +2,7 @@ import type { Config } from '../src/core/config'
 import type VNode from '../src/core/vdom/vnode'
 import type Watcher from '../src/core/observer/watcher'
 
+// 组件的所有属性
 declare interface Component {
   // constructor information
   static cid: number;
