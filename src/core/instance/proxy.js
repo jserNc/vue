@@ -89,9 +89,11 @@ if (process.env.NODE_ENV !== 'production') {
         ? getHandler
 		// 代理 propKey in proxy 操作
         : hasHandler
+	 
 	  // 代理 vm 对象的属性操作
       vm._renderProxy = new Proxy(vm, handlers)
     } else {
+	  // 自己代理自己，也就是不代理
       vm._renderProxy = vm
     }
   }

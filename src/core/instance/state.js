@@ -33,11 +33,14 @@ const sharedPropertyDefinition = {
   set: noop
 }
 
+// 定义 target 的 key 属性 get/set 操作 
 export function proxy (target: Object, sourceKey: string, key: string) {
+  // 获取 target[key] -> target[sourceKey][key]
   sharedPropertyDefinition.get = function proxyGetter () {
 	// 这里的 this 指 target，可以通过打印 console.log('this === target:',this === target) 来验证
     return this[sourceKey][key]
   }
+  // 设置 target[key] -> target[sourceKey][key] = val
   sharedPropertyDefinition.set = function proxySetter (val) {
     this[sourceKey][key] = val
   }
@@ -116,6 +119,7 @@ function initProps (vm: Component, propsOptions: Object) {
 
 function initData (vm: Component) {
   let data = vm.$options.data
+  // ① data 格式化
   data = vm._data = typeof data === 'function'
     ? getData(data, vm)
     : data || {}
@@ -127,6 +131,8 @@ function initData (vm: Component) {
       vm
     )
   }
+
+  // ② data 代理
   // proxy data on instance
   const keys = Object.keys(data)
   const props = vm.$options.props
@@ -134,6 +140,7 @@ function initData (vm: Component) {
   let i = keys.length
   while (i--) {
     const key = keys[i]
+	// data 里的属性名不应该和 methods 里的属性名重复
     if (process.env.NODE_ENV !== 'production') {
       if (methods && hasOwn(methods, key)) {
         warn(
@@ -142,6 +149,7 @@ function initData (vm: Component) {
         )
       }
     }
+	// data 里的属性名也不应该和 props 里的属性名重复
     if (props && hasOwn(props, key)) {
       process.env.NODE_ENV !== 'production' && warn(
         `The data property "${key}" is already declared as a prop. ` +
@@ -149,13 +157,21 @@ function initData (vm: Component) {
         vm
       )
     } else if (!isReserved(key)) {
+	  /*
+		代理 vm[key] 属性
+		① 获取 vm[key] -> vm._data[key]
+		② 设置 vm[key] -> vm._data[key] = val
+	  */
       proxy(vm, `_data`, key)
     }
   }
+
+  // ③ data 观察
   // observe data
   observe(data, true /* asRootData */)
 }
 
+// 执行 data 函数
 function getData (data: Function, vm: Component): any {
   try {
     return data.call(vm)
